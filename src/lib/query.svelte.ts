@@ -79,7 +79,11 @@ export class Query<
 		newQuery: QueryOrQueryRequest<any, any, any, TSchema, TReturn, any>,
 		enabled: boolean = true
 	) {
-		this.#query_impl = addContextToQuery(newQuery, {}) as QueryDef<TTable, TSchema, TReturn>;
+		this.#query_impl = addContextToQuery(newQuery, this.#z.context) as QueryDef<
+			TTable,
+			TSchema,
+			TReturn
+		>;
 		this.#view = this.#z.viewStore.getView(this.#z, this.#query_impl, enabled);
 		// Setting #view (a $state) will trigger reactivity in components reading .data/.details
 	}
